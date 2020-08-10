@@ -1,0 +1,12 @@
+.room {
+  &-messages {
+    margin-bottom: 10px;
+
+    border: 1px dotted gray;
+  }
+
+  &-new_message {
+    width: 500px;
+    margin-left: auto;
+  }
+}

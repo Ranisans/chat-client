@@ -12,6 +12,8 @@ import {
 } from "../../types";
 import { MESSAGE_HEIGHT, VIEWPORT_HEIGHT } from "../../constants";
 
+import "./RoomContainer.scss";
+
 const RoomContainer: React.FC<IRoomContainer> = ({
   messages: messagesArray,
   currentUserName,
@@ -47,18 +49,22 @@ const RoomContainer: React.FC<IRoomContainer> = ({
 
   return (
     <div className="room">
-      <MessagesBlock
-        messages={messages}
-        currentUserName={currentUserName}
-        rowHeight={MESSAGE_HEIGHT}
-        viewportHeight={VIEWPORT_HEIGHT}
-        callback={messageCallback}
-      />
-      <NewMessage
-        id={editedMessageId}
-        text={editedMessageText}
-        callback={newMessageCallback}
-      />
+      <div className="room-messages">
+        <MessagesBlock
+          messages={messages}
+          currentUserName={currentUserName}
+          rowHeight={MESSAGE_HEIGHT}
+          viewportHeight={VIEWPORT_HEIGHT}
+          callback={messageCallback}
+        />
+      </div>
+      <div className="room-new_message">
+        <NewMessage
+          id={editedMessageId}
+          text={editedMessageText}
+          callback={newMessageCallback}
+        />
+      </div>
     </div>
   );
 };
