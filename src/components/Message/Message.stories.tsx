@@ -5,7 +5,7 @@ import MessageBlock from "./index";
 import { MessageCallback, ISingleMessage } from "../../types";
 
 export default {
-  title: "Message Block",
+  title: "Message",
   component: MessageBlock,
 };
 
