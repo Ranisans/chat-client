@@ -27,3 +27,21 @@ export interface INewMessage {
   text: string;
   callback: NewMessageCallback;
 }
+
+export enum MessageState {
+  create,
+  edit,
+  delete,
+}
+
+export type RoomContainerCallback = (
+  id: string,
+  text: string,
+  operation: MessageState
+) => void;
+
+export interface IRoomContainer {
+  messages: ISingleMessage[];
+  currentUserName: string;
+  callback: RoomContainerCallback;
+}
