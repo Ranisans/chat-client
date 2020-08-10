@@ -13,6 +13,7 @@ import {
 import { MESSAGE_HEIGHT, VIEWPORT_HEIGHT } from "../../constants";
 
 import "./RoomContainer.scss";
+import getMessageById from "./logic";
 
 const RoomContainer: React.FC<IRoomContainer> = ({
   messages: messagesArray,
@@ -30,8 +31,12 @@ const RoomContainer: React.FC<IRoomContainer> = ({
   const messageCallback: MessageCallback = (id, isEdit) => {
     if (isEdit) {
       // get message by id
-      // setEditedMessageId
-      // setEditedMessageText
+      const message = getMessageById(messages, id);
+      // if message by id is exist
+      if (message) {
+        setEditedMessageId(id);
+        setEditedMessageText(message.text);
+      }
     } else {
       callback(id, "", MessageState.delete);
     }
