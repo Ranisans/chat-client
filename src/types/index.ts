@@ -11,3 +11,11 @@ export interface IMessage extends ISingleMessage {
   isCurrentUser: boolean;
   callback: MessageCallback;
 }
+
+export interface IMessagesBlock {
+  messages: ISingleMessage[];
+  currentUserName: string;
+  rowHeight: number;
+  viewportHeight: number;
+  callback: MessageCallback;
+}
