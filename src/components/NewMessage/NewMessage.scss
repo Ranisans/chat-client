@@ -1,2 +1,36 @@
 .new_message {
+  display: grid;
+
+  height: 100px;
+
+  gap: 3px;
+  grid-template-areas: "textarea button";
+  grid-template-columns: 1fr 65px;
+
+  & * {
+    outline: none;
+  }
+
+  &-text {
+    padding: 10px 10px;
+
+    border-radius: 6px;
+
+    resize: none;
+
+    grid-area: textarea;
+  }
+
+  &-button {
+    height: 40px;
+
+    border-radius: 6px;
+    background-color: #b3e1f3;
+
+    grid-area: button;
+
+    &--edit {
+      background-color: #97f597;
+    }
+  }
 }

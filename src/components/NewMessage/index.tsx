@@ -34,7 +34,7 @@ const NewMessage: React.FC<INewMessage> = ({
       <button
         type="button"
         className={`new_message-button ${
-          messageId !== "" ? "new_message-button---edit" : ""
+          messageId !== "" ? "new_message-button--edit" : ""
         }`}
         onClick={buttonHandler}
       >
