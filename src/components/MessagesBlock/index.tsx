@@ -4,6 +4,8 @@ import Message from "../Message";
 
 import { IMessagesBlock } from "../../types";
 
+import "./MessagesBlock.scss";
+
 const MessagesBlock: React.FC<IMessagesBlock> = ({
   messages,
   currentUserName,
