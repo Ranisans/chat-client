@@ -1,0 +1,107 @@
+$messageBlockHeight: 82px;
+$iconSize: 35px;
+
+.message {
+  display: grid;
+
+  min-height: $messageBlockHeight;
+  margin: 10px 20px;
+
+  grid-gap: 10px;
+  grid-template-areas: "user text currentUser";
+  grid-template-columns: 60px 1fr 60px;
+
+  &-user_block {
+    text-align: center;
+
+    grid-area: user;
+
+    &--current {
+      grid-area: currentUser;
+    }
+  }
+
+  &-avatar {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 15px;
+  }
+
+  &-name {
+    margin: 0;
+    margin-top: 2px;
+
+    font-size: 0.8rem;
+  }
+
+  &-text {
+    position: relative;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+    height: $messageBlockHeight;
+    min-height: $messageBlockHeight;
+    padding: 10px 15px;
+
+    border: 1px solid #00b7ff;
+    border-radius: 15px;
+
+    grid-area: text;
+
+    &--current {
+      border: 1px solid #48db23;
+      background-color: #b0f3d1;
+    }
+
+    &:hover {
+      height: auto;
+    }
+  }
+
+  &-icon_block {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    transition: all 0.3 ease-in-out;
+    transform: translateX(35px);
+  }
+
+  &-icon {
+    width: $iconSize;
+    height: $iconSize;
+    margin-top: 5px;
+
+    opacity: 0.8;
+    border-radius: 50%;
+    outline: none;
+    background-color: #b9b8b8;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80% 80%;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-edit {
+    background-image: url("../../assets/img/pencil.svg");
+
+    filter: invert(27%) sepia(99%) saturate(1615%) hue-rotate(126deg) brightness(92%) contrast(97%);
+  }
+
+  &-delete {
+    background-image: url("../../assets/img/trash.svg");
+
+    filter: invert(6%) sepia(87%) saturate(6707%) hue-rotate(0deg) brightness(105%) contrast(105%);
+  }
+
+  &:hover {
+    .message-icon_block {
+      transform: translateX(0);
+    }
+  }
+}
