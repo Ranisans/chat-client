@@ -19,3 +19,11 @@ export interface IMessagesBlock {
   viewportHeight: number;
   callback: MessageCallback;
 }
+
+export type NewMessageCallback = (id: string, text: string) => void;
+
+export interface INewMessage {
+  id: string;
+  text: string;
+  callback: NewMessageCallback;
+}
