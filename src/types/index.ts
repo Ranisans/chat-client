@@ -45,3 +45,13 @@ export interface IRoomContainer {
   currentUserName: string;
   callback: RoomContainerCallback;
 }
+
+export enum Rooms {
+  work = "work",
+  flood = "flood",
+}
+
+export interface IChatContainer {
+  currentUserName: string;
+  userAvatar: string;
+}
