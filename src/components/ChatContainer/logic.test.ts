@@ -1,5 +1,10 @@
 import { ISingleMessage } from "../../types/index";
-import { loadData, updateMessageById, removeMessageById } from "./logic";
+import {
+  loadData,
+  updateMessageById,
+  removeMessageById,
+  createMessage,
+} from "./logic";
 
 const messages: ISingleMessage[] = [
   {
@@ -65,7 +70,8 @@ describe("update, create, delete message", () => {
 
   describe("create message", () => {
     it("should create new message and put at the end of messages array", () => {
-      const result = createMessage(messges, name, avatar, text);
+      const { name, avatar } = messages[position];
+      const result = createMessage(messages, name, avatar, text);
       expect(result).not.toEqual(messages);
       expect(result.length).toBe(messages.length + 1);
       expect(result[result.length - 1]).toHaveProperty("id");

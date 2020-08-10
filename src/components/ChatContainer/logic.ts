@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 import { SERVER_ADDRESS } from "../../constants/index";
 import { ISingleMessage } from "../../types/index";
 
@@ -33,5 +35,23 @@ export const removeMessageById = (
   id: string
 ): ISingleMessage[] => {
   const newMessages = messages.filter((message) => message.id !== id);
+  return newMessages;
+};
+
+export const createMessage = (
+  messages: ISingleMessage[],
+  name: string,
+  avatar: string,
+  text: string
+): ISingleMessage[] => {
+  const id = uuidv4();
+  const newMessage = {
+    id,
+    avatar,
+    name,
+    text,
+  };
+  const newMessages = [...messages];
+  newMessages.push(newMessage);
   return newMessages;
 };
