@@ -21,6 +21,11 @@ const NewMessage: React.FC<INewMessage> = ({
     callback(messageId, message);
   };
 
+  const cancelHandler = () => {
+    setMessage("");
+    setMessageId("");
+  };
+
   return (
     <div className="new_message">
       <textarea
@@ -31,15 +36,24 @@ const NewMessage: React.FC<INewMessage> = ({
           setMessage(e.currentTarget.value)
         }
       />
-      <button
-        type="button"
-        className={`new_message-button ${
-          messageId !== "" ? "new_message-button--edit" : ""
-        }`}
-        onClick={buttonHandler}
-      >
-        {messageId !== "" ? "Change" : "Send"}
-      </button>
+      <div className="button_block">
+        <button
+          type="button"
+          className={`new_message-button new_message-button_send ${
+            messageId !== "" ? "new_message-button_send--edit" : ""
+          }`}
+          onClick={buttonHandler}
+        >
+          {messageId !== "" ? "Change" : "Send"}
+        </button>
+        <button
+          type="button"
+          className="new_message-button new_message-button_cancel"
+          onClick={cancelHandler}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 };
