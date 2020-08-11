@@ -1,0 +1,45 @@
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.App {
+  height: 100%;
+}
+
+.pop_up {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  width: 250px;
+  height: 55px;
+  margin: 0 auto;
+
+  transition: all ease-in 0.5s;
+  transform: translateY(0);
+  &--hidden {
+    transform: translateY(-55px);
+  }
+  &-message {
+    display: block;
+
+    margin: 0;
+    padding: 15px 7px;
+
+    color: #db9393;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: #242424;
+
+    text-align: center;;
+  }
+}
