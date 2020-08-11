@@ -37,9 +37,10 @@ const MessagesBlock: React.FC<IMessagesBlock> = ({
     setScrollTop(0);
     const { current } = scrollRef;
     if (current) {
-      current.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      setScrollTop(totalHeight);
+      current.scroll({ top: totalHeight, left: 0 });
     }
-  }, [messages]);
+  }, [messages, totalHeight]);
 
   const offsetY = startNode * rowHeight;
 

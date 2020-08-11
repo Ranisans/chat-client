@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import RoomContainer from "../RoomContainer";
 
 import {
-  createMessage,
-  updateMessageById,
-  removeMessageById,
   loadData,
+  updateMessageByIdOnServer,
+  removeMessageByIdOnServer,
+  createMessageOnServer,
 } from "./logic";
 import {
   ISingleMessage,
@@ -27,21 +27,58 @@ const ChatContainer: React.FC<IChatContainer> = ({
   const [room, setRoom] = useState<Rooms>(Rooms.work);
   const [showError, setShowError] = useState<boolean>(false);
 
-  const roomContainerCallback: RoomContainerCallback = (
+  const asyncRoomUpdate = async () => {
+    try {
+      const result = await loadData(room);
+      if (Array.isArray(result)) {
+        setMessages(result);
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      setShowError(true);
+    }
+  };
+
+  const roomContainerCallback: RoomContainerCallback = async (
     id,
     text,
     operation
   ) => {
     switch (operation) {
-      case MessageState.create:
-        setMessages(createMessage(messages, currentUserName, userAvatar, text));
+      case MessageState.create: {
+        const result = await createMessageOnServer(
+          currentUserName,
+          userAvatar,
+          text,
+          room
+        );
+        if (result) {
+          asyncRoomUpdate();
+        } else {
+          //! error
+        }
         break;
-      case MessageState.edit:
-        setMessages(updateMessageById(messages, id, text));
+      }
+      case MessageState.edit: {
+        const result = await updateMessageByIdOnServer(id, text, room);
+        console.log("result", result);
+        if (result) {
+          asyncRoomUpdate();
+        } else {
+          //! error
+        }
         break;
-      case MessageState.delete:
-        setMessages(removeMessageById(messages, id));
+      }
+      case MessageState.delete: {
+        const result = await removeMessageByIdOnServer(id, room);
+        if (result) {
+          asyncRoomUpdate();
+        } else {
+          //! error
+        }
         break;
+      }
 
       default:
         break;
@@ -49,20 +86,8 @@ const ChatContainer: React.FC<IChatContainer> = ({
   };
 
   useEffect(() => {
-    const asyncRoomUpdate = async () => {
-      try {
-        const result = await loadData(room);
-        if (Array.isArray(result)) {
-          setMessages(result);
-        } else {
-          throw new Error();
-        }
-      } catch (error) {
-        setShowError(true);
-      }
-    };
-
     asyncRoomUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
   const roomChanger = (activeRoom: Rooms) => {
