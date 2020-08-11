@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import Message from "../Message";
 
@@ -13,7 +13,8 @@ const MessagesBlock: React.FC<IMessagesBlock> = ({
   viewportHeight,
   callback,
 }: IMessagesBlock) => {
-  const [scrollTop, setScrollTop] = React.useState(0);
+  const [scrollTop, setScrollTop] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const rowsCount = messages.length;
   const totalHeight = rowsCount * rowHeight;
@@ -32,6 +33,14 @@ const MessagesBlock: React.FC<IMessagesBlock> = ({
     setScrollTop(e.currentTarget.scrollTop);
   };
 
+  useEffect(() => {
+    setScrollTop(0);
+    const { current } = scrollRef;
+    if (current) {
+      current.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [messages]);
+
   const offsetY = startNode * rowHeight;
 
   const visibleMessages = messages.slice(
@@ -44,6 +53,7 @@ const MessagesBlock: React.FC<IMessagesBlock> = ({
       className="messages_table"
       onScroll={onScroll}
       style={{ height: viewportHeight }}
+      ref={scrollRef}
     >
       <div className="messages_table-viewport" style={{ height: totalHeight }}>
         <div

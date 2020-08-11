@@ -17,13 +17,14 @@ const NewMessage: React.FC<INewMessage> = ({
     setMessageId(id);
   }, [id, text]);
 
-  const buttonHandler = () => {
-    callback(messageId, message);
-  };
-
   const cancelHandler = () => {
     setMessage("");
     setMessageId("");
+  };
+
+  const buttonHandler = () => {
+    callback(messageId, message);
+    cancelHandler();
   };
 
   return (
