@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 import RoomContainer from "../RoomContainer";
+
+import {
+  createMessage,
+  updateMessageById,
+  removeMessageById,
+  loadData,
+} from "./logic";
 import {
   ISingleMessage,
   IChatContainer,
@@ -23,13 +30,13 @@ const ChatContainer: React.FC<IChatContainer> = ({
   ) => {
     switch (operation) {
       case MessageState.create:
-        // create new message
+        setMessages(createMessage(messages, currentUserName, userAvatar, text));
         break;
       case MessageState.edit:
-        // update message by id
+        setMessages(updateMessageById(messages, id, text));
         break;
       case MessageState.delete:
-        // delete message by id
+        setMessages(removeMessageById(messages, id));
         break;
 
       default:
@@ -38,8 +45,21 @@ const ChatContainer: React.FC<IChatContainer> = ({
   };
 
   useEffect(() => {
-    // load messages from server
-    // setMessages()
+    const asyncRoomUpdate = async () => {
+      try {
+        const result = await loadData(room);
+        if (Array.isArray(result)) {
+          setMessages(result);
+        } else {
+          throw new Error();
+        }
+      } catch (error) {
+        console.log("asyncRoomUpdate -> error", error);
+        //! error
+      }
+    };
+
+    asyncRoomUpdate();
   }, [room]);
 
   const roomChanger = (activeRoom: Rooms) => {

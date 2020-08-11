@@ -35,7 +35,7 @@ describe("load data from DB (server API)", () => {
   });
   it("should load nothing from DB if table doesn't exist", async () => {
     const result = await loadData("qwerty");
-    expect(Object.entries(result).length).toBe(0);
+    expect(Array.isArray(result)).toBe(false);
   });
 });
 

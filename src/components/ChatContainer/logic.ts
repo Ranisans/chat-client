@@ -52,6 +52,6 @@ export const createMessage = (
     text,
   };
   const newMessages = [...messages];
-  newMessages.push(newMessage);
+  newMessages.unshift(newMessage);
   return newMessages;
 };
