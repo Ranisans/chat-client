@@ -17,6 +17,7 @@ import {
 } from "../../types";
 
 import "./ChatContainer.scss";
+import ErrorWindow from "../ErrorWindow";
 
 const ChatContainer: React.FC<IChatContainer> = ({
   currentUserName,
@@ -24,6 +25,7 @@ const ChatContainer: React.FC<IChatContainer> = ({
 }: IChatContainer) => {
   const [messages, setMessages] = useState<ISingleMessage[]>([]);
   const [room, setRoom] = useState<Rooms>(Rooms.work);
+  const [showError, setShowError] = useState<boolean>(false);
 
   const roomContainerCallback: RoomContainerCallback = (
     id,
@@ -56,8 +58,7 @@ const ChatContainer: React.FC<IChatContainer> = ({
           throw new Error();
         }
       } catch (error) {
-        console.log("asyncRoomUpdate -> error", error);
-        //! error
+        setShowError(true);
       }
     };
 
@@ -99,6 +100,17 @@ const ChatContainer: React.FC<IChatContainer> = ({
         currentUserName={currentUserName}
         callback={roomContainerCallback}
       />
+      {showError ? (
+        <div
+          role="button"
+          aria-label="edit message"
+          tabIndex={0}
+          onClick={() => setShowError(false)}
+          onKeyPress={() => setShowError(false)}
+        >
+          <ErrorWindow />
+        </div>
+      ) : null}
     </div>
   );
 };
