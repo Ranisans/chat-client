@@ -16,6 +16,8 @@ import {
   MessageState,
 } from "../../types";
 
+import "./ChatContainer.scss";
+
 const ChatContainer: React.FC<IChatContainer> = ({
   currentUserName,
   userAvatar,

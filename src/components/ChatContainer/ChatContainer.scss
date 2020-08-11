@@ -1,0 +1,31 @@
+.chat_container {
+  width: 600px;
+  margin: 0 auto;
+
+  &-controls {
+    margin-bottom: 10px;
+  }
+
+  &-room_button {
+    box-sizing: border-box;
+    width: 100px;
+    height: 40px;
+    margin-right: 5px;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    border-radius: 6px;
+    background-color: #b1f3a1;
+
+    text-transform: uppercase;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &--current {
+      background-color: #fafd36;
+    }
+  }
+}
